@@ -1,6 +1,8 @@
 node {
     def app
-
+	environment{
+registry="pauga98/test"
+}
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
 
@@ -15,7 +17,7 @@ stage('Verificar Docker') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-      app = docker.build("getintodevops/hellonode")
+      app = docker.build("pauga98/test")
 
     }
 
@@ -33,7 +35,7 @@ stage('Verificar Docker') {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('', 'docker-hub-credentials') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
