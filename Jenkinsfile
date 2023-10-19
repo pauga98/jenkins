@@ -7,13 +7,11 @@ node {
         checkout scm
     }
 
-    stage('Build imag') {
-        /*AAAAAAAAAAAAAAAAAAA This builds the actual image; synonymous to
+    stage('Build image') {
+        /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-      script {
-        sh 'sudo docker build -t getintodevops/hellonode .'
-    }
+      app = docker.build("getintodevops/hellonode")
 
     }
 
