@@ -6,7 +6,11 @@ node {
 
         checkout scm
     }
-
+stage('Verificar Docker') {
+    script {
+        sh 'docker --version'
+    }
+}
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
